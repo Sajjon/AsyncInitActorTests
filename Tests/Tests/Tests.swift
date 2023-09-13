@@ -56,15 +56,13 @@ public final actor ManagedAtomicProfileStore: ProfileStoreProtocol {
 extension ManagedAtomicProfileStore {
 
 	public static func shared() async -> ManagedAtomicProfileStore {
-		if let existing = atom.load() {
-			return existing
-		}
-		return await atom.storeIfNilThenLoad(ManagedAtomicProfileStore())
+		await atom.storeIfNilThenLoad(ManagedAtomicProfileStore())
 	}
 
 	public func getProfile() async -> Profile {
 		profile
 	}
+	
 	public func setProfile(_ profile: Profile) async {
 		self.profile = profile
 	}
