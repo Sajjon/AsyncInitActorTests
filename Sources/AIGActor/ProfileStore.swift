@@ -6,27 +6,27 @@ public protocol ProfileStoreProtocol {
 	func setProfile(_ profile: Profile) async
 }
 
-public final actor ManagedAtomicLazyReferenceProfileStore: ProfileStoreProtocol {
+public final actor ManagedAtomicProfileStore: ProfileStoreProtocol {
 	private var profile: Profile
 	private init() async {
 		self.profile = await KeychainProfileProvider.provide()
 	}
 }
 
-extension ManagedAtomicLazyReferenceProfileStore {
+extension ManagedAtomicProfileStore {
 
-	private static let atom = ManagedAtomicLazyReference<ManagedAtomicLazyReferenceProfileStore>()
+	private static let atom = ManagedAtomicLazyReference<ManagedAtomicProfileStore>()
 
-	public static func shared() async -> ManagedAtomicLazyReferenceProfileStore {
+	public static func shared() async -> ManagedAtomicProfileStore {
 		if let apa = atom.load() {
 			return apa
 		}
-		return await atom.storeIfNilThenLoad(ManagedAtomicLazyReferenceProfileStore())
+		return await atom.storeIfNilThenLoad(ManagedAtomicProfileStore())
 	}
 	
 }
 
-extension ManagedAtomicLazyReferenceProfileStore {
+extension ManagedAtomicProfileStore {
 	public func getProfile() async -> Profile {
 		profile
 	}

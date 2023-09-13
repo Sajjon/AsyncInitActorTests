@@ -65,7 +65,7 @@ func doTestProfileStore<ProfileStore: ProfileStoreProtocol>(
 final class ProfileStoreTests: XCTestCase {
 	
 	func test_managed() async {
-		await doTestProfileStore(type: ManagedAtomicLazyReferenceProfileStore.self)
+		await doTestProfileStore(type: ManagedAtomicProfileStore.self)
 	}
 	
 	
