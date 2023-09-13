@@ -18,8 +18,8 @@ extension ManagedAtomicProfileStore {
 	private static let atom = ManagedAtomicLazyReference<ManagedAtomicProfileStore>()
 
 	public static func shared() async -> ManagedAtomicProfileStore {
-		if let apa = atom.load() {
-			return apa
+		if let existing = atom.load() {
+			return existing
 		}
 		return await atom.storeIfNilThenLoad(ManagedAtomicProfileStore())
 	}
