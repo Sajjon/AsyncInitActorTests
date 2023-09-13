@@ -120,7 +120,8 @@ extension ReentrantProfileStore {
 
 /// This test method has not been implemented with any particular thoughts in mind
 /// mostly creating a bunch of unstructured task and reading/setting profile on shared
-/// profile store interleaved with some Task.yields
+/// profile store interleaved with some `Task.yield()`'s which seem to what makes
+/// the ReentrantProfileStore fail.
 func doTestProfileStore<ProfileStore: ProfileStoreProtocol>(
 	type: ProfileStore.Type = ProfileStore.self
 ) async {
