@@ -175,7 +175,7 @@ func doTestProfileStore<ProfileStore: ProfileStoreProtocol>(
 		let profile = await task.value.getProfile()
 		values.insert(profile.id)
 	}
-	XCTAssertEqual(values.count, 1)
+	XCTAssertEqual(values.count, 1) // will fail for `test_reentrant` sometimes
 }
 
 // MARK: Test
