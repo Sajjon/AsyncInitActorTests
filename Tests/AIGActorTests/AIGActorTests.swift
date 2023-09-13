@@ -1,19 +1,6 @@
 import XCTest
 @testable import AIGActor
 
-struct Profile {
-	typealias ID = UUID
-	let id: ID
-	init(id: ID = .init()) {
-		self.id = id
-	}
-}
-struct KeychainProfileProvider: AsyncValueProvider {
-	typealias Value = Profile
-	static func provide() async -> Profile {
-		.init()
-	}
-}
 
 typealias Bad = BadStore<KeychainProfileProvider>
 
