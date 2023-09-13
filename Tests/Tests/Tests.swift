@@ -118,9 +118,9 @@ extension ReentrantProfileStore {
 
 // MARK: Test Helper
 
-/// When run repeatedly 
-/// - 10 000 times (takes 30 sec on an M1).
-/// - 100 000 times (takes 5 min on an M1).
+/// This test method has not been implemented with any particular thoughts in mind
+/// mostly creating a bunch of unstructured task and reading/setting profile on shared
+/// profile store interleaved with some Task.yields
 func doTestProfileStore<ProfileStore: ProfileStoreProtocol>(
 	type: ProfileStore.Type = ProfileStore.self
 ) async {
