@@ -1,10 +1,7 @@
 import Atomics
 import ConcurrencyExtras
 
-public protocol AsyncValueProvider {
-	associatedtype Value
-	static func provide() async -> Value
-}
+
 
 
 final class PseudoBox {

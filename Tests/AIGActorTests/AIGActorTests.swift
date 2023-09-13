@@ -20,6 +20,7 @@ typealias Bad = BadStore<KeychainProfileProvider>
 final class AIGActorTests: XCTestCase {
 	
 	
+	/// This test fails in ~30% of cases.
     func test_bad() async {
 		let t0 = Task {
 			await Bad.shared()
