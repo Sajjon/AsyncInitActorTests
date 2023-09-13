@@ -32,7 +32,7 @@ extension AsyncInitSharedStoreActor {
 	}
 
 	public func update(_ value: Value) async {
-		self.v = value
+		self.value = value
 	}
 }
 ```
