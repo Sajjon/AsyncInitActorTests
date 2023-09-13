@@ -45,7 +45,7 @@ public protocol ProfileStoreProtocol {
 
 /// A ProfileStore which uses `ManagedAtomicLazyReference` under the hood.
 public final actor ManagedAtomicProfileStore: ProfileStoreProtocol {
-	private static let atom = ManagedAtomicLazyReference<ManagedAtomicProfileStore>()
+	private static let managedAtomicLazyRef = ManagedAtomicLazyReference<ManagedAtomicProfileStore>()
 	private var profile: Profile
 	private init() async {
 		self.profile = await KeychainProfileProvider.provide()
@@ -56,7 +56,7 @@ public final actor ManagedAtomicProfileStore: ProfileStoreProtocol {
 extension ManagedAtomicProfileStore {
 
 	public static func shared() async -> ManagedAtomicProfileStore {
-		await atom.storeIfNilThenLoad(ManagedAtomicProfileStore())
+		await managedAtomicLazyRef.storeIfNilThenLoad(ManagedAtomicProfileStore())
 	}
 
 	public func getProfile() async -> Profile {
@@ -190,6 +190,5 @@ final class ProfileStoreTests: XCTestCase {
 	func test_reentrant() async {
 		await doTestProfileStore(type: ReentrantProfileStore.self)
 	}
-	
 
 }

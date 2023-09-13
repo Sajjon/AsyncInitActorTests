@@ -10,7 +10,7 @@ Use `ManagedAtomicLazyReference` inside of [swift-atomics](https://github.com/ap
 /// be asyncrounsly created initially
 public final actor AsyncInitSharedStoreActor {
 	/// Swift Atomics
-	private static let atom = ManagedAtomicLazyReference<AsyncInitSharedStoreActor>()
+	private static let managedAtomicLazyRef = ManagedAtomicLazyReference<AsyncInitSharedStoreActor>()
 	
 	/// Some protected value, typically a struct
 	private var value: Value
@@ -24,7 +24,7 @@ public final actor AsyncInitSharedStoreActor {
 extension AsyncInitSharedStoreActor {
 
 	public static func shared() async -> AsyncInitSharedStoreActor {
-		await atom.storeIfNilThenLoad(AsyncInitSharedStoreActor())
+		await managedAtomicLazyRef.storeIfNilThenLoad(AsyncInitSharedStoreActor())
 	}
 
 	public func get() async -> Value {
