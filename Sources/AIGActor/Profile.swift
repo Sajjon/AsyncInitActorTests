@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Profile {
-	typealias ID = UUID
-	let id: ID
-	init(id: ID = .init()) {
+public struct Profile {
+	public typealias ID = UUID
+	public let id: ID
+	public init(id: ID = .init()) {
 		self.id = id
 	}
 }

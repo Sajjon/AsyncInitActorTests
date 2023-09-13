@@ -1,50 +1,48 @@
 import XCTest
 @testable import AIGActor
 
-
-typealias Bad = BadStore<KeychainProfileProvider>
-
-final class AIGActorTests: XCTestCase {
+final class ManagedAtomicLazyReferenceProfileStoreTests: XCTestCase {
 	
+	typealias ProfileStore = ManagedAtomicLazyReferenceProfileStore
 	
-	/// This test fails in ~30% of cases.
-    func test_bad() async {
+	/// Passes when run repeatedly 100 000 times (takes 5 min on an M1).
+    func test_ManagedAtomicLazyReference() async {
 		let t0 = Task {
-			await Bad.shared()
+			await ProfileStore.shared()
 		}
 		let t1 = Task {
-			await Bad.shared()
+			await ProfileStore.shared()
 		}
 		let t2 = Task {
-			await Bad.shared()
+			await ProfileStore.shared()
 		}
 		let t3 = Task {
-			await Bad.shared()
+			await ProfileStore.shared()
 		}
 		let t4 = Task {
-			await Bad.shared()
+			await ProfileStore.shared()
 		}
 		let t5 = Task {
-			await Bad.shared()
+			await ProfileStore.shared()
 		}
 		let t6 = Task {
-			await Bad.shared()
+			await ProfileStore.shared()
 		}
 		let t7 = Task {
-			await Bad.shared()
+			await ProfileStore.shared()
 		}
 		let t8 = Task {
-			await Bad.shared()
+			await ProfileStore.shared()
 		}
 		let t9 = Task {
-			await Bad.shared()
+			await ProfileStore.shared()
 		}
 		
 		let tasks = [t0, t1, t2, t3, t4, t5, t6, t7, t8, t9]
 		var values = Set<Profile.ID>()
 		for task in tasks {
-			let value = await task.value.get().id
-			values.insert(value)
+			let profile = await task.value.getProfile()
+			values.insert(profile.id)
 		}
 		XCTAssertEqual(values.count, 1)
     }

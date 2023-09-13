@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct KeychainProfileProvider: AsyncValueProvider {
+struct KeychainProfileProvider {
 	typealias Value = Profile
 	static func provide() async -> Profile {
 		.init()
